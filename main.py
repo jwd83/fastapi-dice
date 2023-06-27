@@ -7,6 +7,10 @@ app = FastAPI()
 async def root():
     return {"message": "Please see the docs at /docs"}
 
+@app.get("/hello/{name}")
+async def hello(name: str):
+    return {"message": f"Hello, {name}!"}
+
 @app.get("/roll/{dice}")
 async def roll(dice: str):
     try:
