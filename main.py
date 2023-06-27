@@ -15,6 +15,11 @@ async def roll(dice: str):
         results['rolls'] = []
         results['modifier'] = 0
         results['total'] = 0
+        results['advantage'] = 0
+        results['disadvantage'] = 0
+        results['modified_advantage'] = 0
+        results['modified_disadvantage'] = 0
+
         dice = dice.lower()
 
         # split off a + or - modifier if it exists
@@ -49,6 +54,15 @@ async def roll(dice: str):
 
         # add the modifier
         results['total'] += results['modifier']
+
+        # save the advantage as the highest roll
+        results['advantage'] = max(results['rolls'])
+        results['modified_advantage'] = results['advantage'] + results['modifier']
+
+        # save the disadvantage as the lowest roll
+        results['disadvantage'] = min(results['rolls'])
+        results['modified_disadvantage'] = results['disadvantage'] + results['modifier']
+
 
         return results
 
